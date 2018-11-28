@@ -8,3 +8,11 @@ node_modules
 # Istanbul test coverage
 coverage
 .nyc_output
+
+// .npmignore
+.babelrc
+/src
+
+/build
+*.log
+/node_modules
