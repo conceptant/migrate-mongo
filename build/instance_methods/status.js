@@ -36,11 +36,11 @@ var status = function status(config) {
               collectionName = "changelog";
 
 
-              if (config.changeLogCollectionName) {
-                collectionName = config.changeLogCollectionName;
+              if (config.changelogCollectionName) {
+                collectionName = config.changelogCollectionName;
               } else {
                 collectionName = "changelog";
-                console.warn('No changeLogCollectionName found in confg - defaulting to "changelog"');
+                console.warn('No changelogCollectionName found in confg - defaulting to "changelog"');
               }
 
               collection = db.collection(collectionName);

@@ -70,11 +70,11 @@ exports.default = function (config, status) {
                         case 13:
                           collectionName = void 0;
 
-                          if (config.changeLogCollectionName) {
-                            collectionName = config.changeLogCollectionName;
+                          if (config.changelogCollectionName) {
+                            collectionName = config.changelogCollectionName;
                           } else {
                             collectionName = "changelog";
-                            console.warn('No changeLogCollectionName found in confg - defaulting to "changelog"');
+                            console.warn('No changelogCollectionName found in confg - defaulting to "changelog"');
                           }
 
                           collection = db.collection(collectionName);
