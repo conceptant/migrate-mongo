@@ -3,6 +3,9 @@ A database migration tool for MongoDB in Node.
 
 ✨ [![Build Status](http://img.shields.io/travis/seppevs/migrate-mongo.svg?style=flat)](https://travis-ci.org/seppevs/migrate-mongo) [![Coverage Status](https://coveralls.io/repos/github/seppevs/migrate-mongo/badge.svg?branch=master)](https://coveralls.io/r/seppevs/migrate-mongo) [![NPM](http://img.shields.io/npm/v/migrate-mongo.svg?style=flat)](https://www.npmjs.org/package/migrate-mongo) [![Downloads](http://img.shields.io/npm/dm/migrate-mongo.svg?style=flat)](https://www.npmjs.org/package/migrate-mongo) [![Dependencies](https://david-dm.org/seppevs/migrate-mongo.svg)](https://david-dm.org/seppevs/migrate-mongo) [![Known Vulnerabilities](https://snyk.io/test/github/seppevs/migrate-mongo/badge.svg)](https://snyk.io/test/github/seppevs/migrate-mongo) ✨
 
+<a href='https://ko-fi.com/D1D5O6O6' target='_blank'><img height='24' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
+
 ## Installation
 ````bash
 $ npm install -g migrate-mongo
@@ -30,7 +33,7 @@ Usage: migrate-mongo [options] [command]
 
 ## Quickstart
 ### Initialize a new project
-Make sure you have [Node.js](https://nodejs.org/en/) 7.6.0 (or higher) installed.  
+Make sure you have [Node.js](https://nodejs.org/en/) 8.0.0 (or higher) installed.  
 
 Create a directory where you want to store your migrations for your mongo database (eg. 'albums' here) and cd into it
 ````bash
@@ -48,7 +51,7 @@ The above command did two things:
 1. create a sample 'migrate-mongo-config.js' file and 
 2. create a 'migrations' directory
 
-Edit the migrate-mongo-config.js file. Make sure you change the mongodb url:
+Edit the migrate-mongo-config.js file. An object or promise can be returned. Make sure you change the mongodb url: 
 ````javascript
 // In this file you can configure migrate-mongo
 
@@ -212,11 +215,13 @@ $ migrate-mongo status
 └─────────────────────────────────────────┴────────────┘
 ````
 
-## Using a custom config file
+## Extra tips and tricks
+
+### Using a custom config file
 All actions (except ```init```) accept an optional ````-f```` or ````--file```` option to specify a path to a custom config file.
 By default, migrate-mongo will look for a ````migrate-mongo-config.js```` config file in of the current directory.
 
-### Example:
+#### Example:
 
 ````bash
 $ migrate-mongo status -f '~/configs/albums-migrations.js'
@@ -227,6 +232,18 @@ $ migrate-mongo status -f '~/configs/albums-migrations.js'
 └─────────────────────────────────────────┴────────────┘
 
 ````
+
+### Using npm packages in your migration scripts
+You can use use Node.js modules (or require other modules) in your migration scripts.
+It's even possible to use npm modules, just provide a `package.json` file in the root of your migration project:
+
+````bash
+$ cd albums-migrations
+$ npm init --yes
+````
+
+Now you have a package.json file, and you can install your favorite npm modules that might help you in your migration scripts.
+For example, one of the very useful [promise-fun](https://github.com/sindresorhus/promise-fun) npm modules.
 
 ## API Usage
 
@@ -273,12 +290,12 @@ Connect to a mongo database using the connection settings from the `migrate-mong
 const db = await database.connect();
 ```
 
-### `config.read() → JSON`
+### `config.read() → Promise<JSON>`
 
 Read connection settings from the `migrate-mongo-config.js` file.
 
 ```javascript
-const mongoConnectionSettings = config.read();
+const mongoConnectionSettings = await config.read();
 ```
 
 ### `up(MongoDb) → Promise<Array<fileName>>`

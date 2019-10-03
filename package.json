@@ -1,72 +1,51 @@
 {
-  "_from": "git+ssh://git@github.com/powderham/migrate-mongo.git",
-  "_id": "migrate-mongo@4.1.2",
-  "_inBundle": false,
-  "_integrity": "",
-  "_location": "/migrate-mongo",
-  "_phantomChildren": {
-    "graceful-fs": "4.1.11",
-    "jsonfile": "4.0.0",
-    "universalify": "0.1.2"
-  },
-  "_requested": {
-    "type": "git",
-    "raw": "git+ssh://git@github.com/powderham/migrate-mongo.git",
-    "rawSpec": "git+ssh://git@github.com/powderham/migrate-mongo.git",
-    "saveSpec": "git+ssh://git@github.com/powderham/migrate-mongo.git",
-    "fetchSpec": "ssh://git@github.com/powderham/migrate-mongo.git",
-    "gitCommittish": null
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "git+ssh://git@github.com/powderham/migrate-mongo.git#3e06ac60f7413930e3f0feae3dca279ac7f3aa23",
-  "_spec": "git+ssh://git@github.com/powderham/migrate-mongo.git",
-  "_where": "/Users/epowderham/Documents/legal-os/V1",
-  "author": {
-    "name": "Sebastian Van Sande"
-  },
+  "name": "migrate-mongo",
+  "version": "6.0.2",
+  "description": "A database migration tool for MongoDB in Node",
+  "main": "lib/migrate-mongo.js",
   "bin": {
     "migrate-mongo": "bin/migrate-mongo.js"
   },
-  "bugs": {
-    "url": "https://github.com/seppevs/migrate-mongo/issues"
+  "scripts": {
+    "test": "nyc --reporter=html --reporter=text mocha --recursive",
+    "test-coverage": "nyc --reporter=text-lcov mocha --recursive | coveralls",
+    "lint": "eslint lib/ test/"
   },
-  "bundleDependencies": false,
-  "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "cli-table": "0.3.1",
-    "commander": "2.18.0",
-    "date-fns": "1.29.0",
-    "fn-args": "3.0.0",
-    "fs-extra": "7.0.0",
-    "lodash": "4.17.11",
-    "mongodb": "3.1.6",
-    "p-each-series": "1.0.0"
-  },
-  "deprecated": false,
-  "description": "A database migration tool for MongoDB in Node",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "chai": "4.2.0",
-    "coveralls": "3.0.2",
-    "eslint": "5.6.1",
-    "eslint-config-airbnb-base": "13.1.0",
-    "eslint-config-prettier": "3.1.0",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-mocha": "5.2.0",
-    "mocha": "5.2.0",
-    "nyc": "13.0.1",
-    "proxyquire": "2.1.0",
-    "sinon": "6.3.4"
+  "author": "Sebastian Van Sande",
+  "license": "MIT",
+  "keywords": [
+    "migrate mongo mongodb migrations database"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seppevs/migrate-mongo.git"
   },
   "engines": {
-    "node": ">=7.6"
+    "node": ">=8"
+  },
+  "preferGlobal": true,
+  "dependencies": {
+    "cli-table": "0.3.1",
+    "commander": "3.0.0",
+    "date-fns": "2.0.1",
+    "fn-args": "5.0.0",
+    "fs-extra": "8.1.0",
+    "lodash": "4.17.15",
+    "mongodb": "3.3.1",
+    "p-each-series": "2.1.0"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "coveralls": "3.0.6",
+    "eslint": "6.2.2",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-prettier": "6.1.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-mocha": "6.1.0",
+    "mocha": "6.2.0",
+    "nyc": "14.1.1",
+    "proxyquire": "2.1.3",
+    "sinon": "7.4.1"
   },
   "eslintConfig": {
     "extends": [
@@ -76,25 +55,5 @@
     "parserOptions": {
       "ecmaVersion": 2018
     }
-  },
-  "homepage": "https://github.com/seppevs/migrate-mongo#readme",
-  "keywords": [
-    "migrate mongo mongodb migrations database"
-  ],
-  "license": "MIT",
-  "main": "build/migrate-mongo.js",
-  "name": "migrate-mongo",
-  "preferGlobal": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/seppevs/migrate-mongo.git"
-  },
-  "scripts": {
-    "lint": "eslint lib/ test/",
-    "test": "nyc --reporter=html --reporter=text mocha --recursive",
-    "test-coverage": "nyc --reporter=text-lcov mocha --recursive | coveralls",
-    "build": "babel lib -d build",
-    "prepare": "npm run build"
-  },
-  "version": "4.1.2"
+  }
 }
