@@ -11,7 +11,7 @@ var now = function now() {
 };
 
 var nowAsString = function nowAsString() {
-  return format(now(), "YYYYMMDDHHmmss");
+  return format(now(), "yyyyMMddHHmmss");
 };
 
 module.exports = {

@@ -22,7 +22,7 @@ var migrationsDir = require("../env/migrationsDir");
 
 module.exports = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(db) {
-    var downgraded, statusItems, appliedItems, lastAppliedItem, migration, args, down, collectionName, collection;
+    var downgraded, statusItems, appliedItems, lastAppliedItem, migration, args, down, config, collectionName, collection;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -39,52 +39,61 @@ module.exports = function () {
             lastAppliedItem = _.last(appliedItems);
 
             if (!lastAppliedItem) {
-              _context.next = 29;
+              _context.next = 34;
               break;
             }
 
             _context.prev = 7;
-            migration = migrationsDir.loadMigration(lastAppliedItem.fileName);
+            _context.next = 10;
+            return migrationsDir.loadMigration(lastAppliedItem.fileName);
+
+          case 10:
+            migration = _context.sent;
             args = fnArgs(migration.down);
             down = args.length > 1 ? promisify(migration.down) : migration.down;
-            _context.next = 13;
+            _context.next = 15;
             return down(db);
 
-          case 13:
-            _context.next = 18;
+          case 15:
+            _context.next = 20;
             break;
 
-          case 15:
-            _context.prev = 15;
+          case 17:
+            _context.prev = 17;
             _context.t0 = _context["catch"](7);
             throw new Error("Could not migrate down " + lastAppliedItem.fileName + ": " + _context.t0.message);
 
-          case 18:
-            collectionName = configFile.read().changelogCollectionName;
+          case 20:
+            _context.next = 22;
+            return configFile.read();
+
+          case 22:
+            config = _context.sent;
+            collectionName = config.changelogCollectionName;
             collection = db.collection(collectionName);
-            _context.prev = 20;
-            _context.next = 23;
+            _context.prev = 25;
+            _context.next = 28;
             return collection.deleteOne({ fileName: lastAppliedItem.fileName });
 
-          case 23:
+          case 28:
             downgraded.push(lastAppliedItem.fileName);
-            _context.next = 29;
+            _context.next = 34;
             break;
 
-          case 26:
-            _context.prev = 26;
-            _context.t1 = _context["catch"](20);
+          case 31:
+            _context.prev = 31;
+            _context.t1 = _context["catch"](25);
             throw new Error("Could not update changelog: " + _context.t1.message);
 
-          case 29:
+          case 34:
             return _context.abrupt("return", downgraded);
 
-          case 30:
+          case 35:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, undefined, [[7, 15], [20, 26]]);
+    }, _callee, undefined, [[7, 17], [25, 31]]);
   }));
 
   return function (_x) {

@@ -26,38 +26,42 @@ module.exports = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              config = configFile.read();
+              _context.next = 2;
+              return configFile.read();
+
+            case 2:
+              config = _context.sent;
               url = _.get(config, "mongodb.url");
               databaseName = _.get(config, "mongodb.databaseName");
               options = _.get(config, "mongodb.options");
 
               if (url) {
-                _context.next = 6;
+                _context.next = 8;
                 break;
               }
 
               throw new Error("No `url` defined in config file!");
 
-            case 6:
+            case 8:
               if (databaseName) {
-                _context.next = 8;
+                _context.next = 10;
                 break;
               }
 
               throw new Error("No `databaseName` defined in config file! This is required since migrate-mongo v3. " + "See https://github.com/seppevs/migrate-mongo#initialize-a-new-project");
 
-            case 8:
-              _context.next = 10;
+            case 10:
+              _context.next = 12;
               return MongoClient.connect(url, options);
 
-            case 10:
+            case 12:
               client = _context.sent;
               db = client.db(databaseName);
 
               db.close = client.close;
               return _context.abrupt("return", db);
 
-            case 14:
+            case 16:
             case "end":
               return _context.stop();
           }

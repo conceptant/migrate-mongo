@@ -36,14 +36,21 @@ module.exports = function () {
           case 4:
             source = path.join(__dirname, "../../samples/migration.js");
             filename = date.nowAsString() + "-" + description.split(" ").join("_") + ".js";
-            destination = path.join(migrationsDir.resolve(), filename);
+            _context.t0 = path;
             _context.next = 9;
-            return fs.copy(source, destination);
+            return migrationsDir.resolve();
 
           case 9:
+            _context.t1 = _context.sent;
+            _context.t2 = filename;
+            destination = _context.t0.join.call(_context.t0, _context.t1, _context.t2);
+            _context.next = 14;
+            return fs.copy(source, destination);
+
+          case 14:
             return _context.abrupt("return", filename);
 
-          case 10:
+          case 15:
           case "end":
             return _context.stop();
         }

@@ -2,39 +2,41 @@
   "name": "migrate-mongo",
   "version": "6.0.2",
   "description": "A database migration tool for MongoDB in Node",
-  "main": "lib/migrate-mongo.js",
+  "main": "build/migrate-mongo.js",
+  "author": {
+    "name": "Sebastian Van Sande"
+  },
   "bin": {
     "migrate-mongo": "bin/migrate-mongo.js"
   },
-  "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha --recursive",
-    "test-coverage": "nyc --reporter=text-lcov mocha --recursive | coveralls",
-    "lint": "eslint lib/ test/"
-  },
-  "author": "Sebastian Van Sande",
-  "license": "MIT",
+  "homepage": "https://github.com/seppevs/migrate-mongo#readme",
   "keywords": [
     "migrate mongo mongodb migrations database"
   ],
+  "license": "MIT",
+  "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/seppevs/migrate-mongo.git"
+    "url": "git+https://github.com/seppevs/migrate-mongo.git"
   },
-  "engines": {
-    "node": ">=8"
-  },
-  "preferGlobal": true,
+  "bundleDependencies": false,
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "cli-table": "0.3.1",
     "commander": "3.0.0",
     "date-fns": "2.0.1",
     "fn-args": "5.0.0",
     "fs-extra": "8.1.0",
     "lodash": "4.17.15",
-    "mongodb": "3.3.1",
+    "mongodb": "^3.3.2",
     "p-each-series": "2.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "chai": "4.2.0",
     "coveralls": "3.0.6",
     "eslint": "6.2.2",
@@ -47,6 +49,9 @@
     "proxyquire": "2.1.3",
     "sinon": "7.4.1"
   },
+  "engines": {
+    "node": ">=7.6"
+  },
   "eslintConfig": {
     "extends": [
       "airbnb-base",
@@ -55,5 +60,12 @@
     "parserOptions": {
       "ecmaVersion": 2018
     }
+  },
+  "scripts": {
+    "lint": "eslint lib/ test/",
+    "test": "nyc --reporter=html --reporter=text mocha --recursive",
+    "test-coverage": "nyc --reporter=text-lcov mocha --recursive | coveralls",
+    "build": "babel lib -d build",
+    "prepare": "npm run build"
   }
 }

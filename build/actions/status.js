@@ -18,7 +18,7 @@ var configFile = require("../env/configFile");
 
 module.exports = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(db) {
-    var fileNames, collectionName, collection, changelog, statusTable;
+    var fileNames, config, collectionName, collection, changelog, statusTable;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -36,12 +36,17 @@ module.exports = function () {
 
           case 6:
             fileNames = _context.sent;
-            collectionName = configFile.read().changelogCollectionName;
+            _context.next = 9;
+            return configFile.read();
+
+          case 9:
+            config = _context.sent;
+            collectionName = config.changelogCollectionName;
             collection = db.collection(collectionName);
-            _context.next = 11;
+            _context.next = 14;
             return collection.find({}).toArray();
 
-          case 11:
+          case 14:
             changelog = _context.sent;
             statusTable = fileNames.map(function (fileName) {
               var itemInLog = find(changelog, { fileName: fileName });
@@ -50,7 +55,7 @@ module.exports = function () {
             });
             return _context.abrupt("return", statusTable);
 
-          case 14:
+          case 17:
           case "end":
             return _context.stop();
         }

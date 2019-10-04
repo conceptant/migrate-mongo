@@ -1,5 +1,9 @@
 "use strict";
 
+var _promise = require("babel-runtime/core-js/promise");
+
+var _promise2 = _interopRequireDefault(_promise);
+
 var _regenerator = require("babel-runtime/regenerator");
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -105,6 +109,23 @@ module.exports = {
     return path.basename(getConfigPath());
   },
   read: function read() {
-    return require(getConfigPath()); // eslint-disable-line
+    var _this3 = this;
+
+    return (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+      var configPath;
+      return _regenerator2.default.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              configPath = getConfigPath();
+              return _context3.abrupt("return", _promise2.default.resolve(require(configPath)));
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, _this3);
+    }))();
   }
 };

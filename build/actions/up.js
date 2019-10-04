@@ -39,57 +39,66 @@ module.exports = function () {
 
             migrateItem = function () {
               var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(item) {
-                var migration, args, up, error, collectionName, collection, fileName, appliedAt;
+                var migration, args, up, error, config, collectionName, collection, fileName, appliedAt;
                 return _regenerator2.default.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
                         _context.prev = 0;
-                        migration = migrationsDir.loadMigration(item.fileName);
+                        _context.next = 3;
+                        return migrationsDir.loadMigration(item.fileName);
+
+                      case 3:
+                        migration = _context.sent;
                         args = fnArgs(migration.up);
                         up = args.length > 1 ? promisify(migration.up) : migration.up;
-                        _context.next = 6;
+                        _context.next = 8;
                         return up(db);
 
-                      case 6:
-                        _context.next = 13;
+                      case 8:
+                        _context.next = 15;
                         break;
 
-                      case 8:
-                        _context.prev = 8;
+                      case 10:
+                        _context.prev = 10;
                         _context.t0 = _context["catch"](0);
                         error = new Error("Could not migrate up " + item.fileName + ": " + _context.t0.message);
 
                         error.migrated = migrated;
                         throw error;
 
-                      case 13:
-                        collectionName = configFile.read().changelogCollectionName;
+                      case 15:
+                        _context.next = 17;
+                        return configFile.read();
+
+                      case 17:
+                        config = _context.sent;
+                        collectionName = config.changelogCollectionName;
                         collection = db.collection(collectionName);
                         fileName = item.fileName;
                         appliedAt = new Date();
-                        _context.prev = 17;
-                        _context.next = 20;
+                        _context.prev = 22;
+                        _context.next = 25;
                         return collection.insertOne({ fileName: fileName, appliedAt: appliedAt });
 
-                      case 20:
-                        _context.next = 25;
+                      case 25:
+                        _context.next = 30;
                         break;
 
-                      case 22:
-                        _context.prev = 22;
-                        _context.t1 = _context["catch"](17);
+                      case 27:
+                        _context.prev = 27;
+                        _context.t1 = _context["catch"](22);
                         throw new Error("Could not update changelog: " + _context.t1.message);
 
-                      case 25:
+                      case 30:
                         migrated.push(item.fileName);
 
-                      case 26:
+                      case 31:
                       case "end":
                         return _context.stop();
                     }
                   }
-                }, _callee, undefined, [[0, 8], [17, 22]]);
+                }, _callee, undefined, [[0, 10], [22, 27]]);
               }));
 
               return function migrateItem(_x2) {
