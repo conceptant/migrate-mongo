@@ -51,7 +51,7 @@ var database = function database(config) {
                 client = _context.sent;
                 db = client.db(databaseName);
 
-                db.close = client.close;
+                db.close = client.close.bind(client);
                 return _context.abrupt("return", db);
 
               case 11:
