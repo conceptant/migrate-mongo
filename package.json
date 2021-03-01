@@ -27,7 +27,7 @@
     "date-fns": "2.0.1",
     "fn-args": "5.0.0",
     "fs-extra": "8.1.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "mongodb": "^3.3.2",
     "p-each-series": "2.1.0"
   },
